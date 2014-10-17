@@ -1,3 +1,7 @@
+var usersAnswers = [];
+var currentAnswer;
+var nextActivated = false;
+
 var startButton = document.getElementById('start');
 
 startButton.addEventListener("click", function(){
@@ -16,21 +20,39 @@ function composeQuestion(){
     return questionBox;
 }
 
-function addListenersTo(element){
-
-    element.addEventListener("click", function(event){
-        if(event.target.name === "choices"){ checkValue(this) }
+function addListenersTo(question){
+    question.addEventListener("click", function(event){
+        if(event.target.name === "choices"){
+            checkValue(this);
+            if(!nextActivated){ addNextButton(); }
+        }
     }, false)
 }
 
 function checkValue(it){
-
     var allChoices = it.getElementsByTagName("input");
     for(var i = 0; i < allChoices.length; i++){
-        if (allChoices[i].checked){ console.log(allChoices[i].value)}
+        if (allChoices[i].checked){
+            currentAnswer = allChoices[i].value;
+            }
     }
+}
+
+var nextButton = document.createElement("button");
+nextButton.appendChild(document.createTextNode("Next ->"))
+
+function addNextButton(){
+    var questionBox = document.getElementById("question").parentNode;
+    questionBox.appendChild(nextButton);
+    nextActivated = true;
 
 }
+
+
+
+
+
+
 
 function insertTitleInto(parent) {
     var questionTitle = document.createElement("h2");
@@ -56,6 +78,8 @@ function createEachChoice(choice, i){
     newNode.appendChild(document.createTextNode(choice));
     return newNode;
 }
+
+
 
 
 var questions = [
