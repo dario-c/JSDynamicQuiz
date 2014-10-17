@@ -3,7 +3,6 @@ var startButton = document.getElementById('start');
 startButton.addEventListener("click", function(){
     var parent = this.parentNode;
     parent.removeChild(this);
-
     parent.appendChild( composeQuestion() );
 }, false);
 
@@ -13,7 +12,24 @@ function composeQuestion(){
     questionBox.id = 'question';
     insertTitleInto(questionBox);
     insertChoicesInto(questionBox);
+    addListenersTo(questionBox);
     return questionBox;
+}
+
+function addListenersTo(element){
+
+    element.addEventListener("click", function(event){
+        if(event.target.name === "choices"){ checkValue(this) }
+    }, false)
+}
+
+function checkValue(it){
+
+    var allChoices = it.getElementsByTagName("input");
+    for(var i = 0; i < allChoices.length; i++){
+        if (allChoices[i].checked){ console.log(allChoices[i].value)}
+    }
+
 }
 
 function insertTitleInto(parent) {
