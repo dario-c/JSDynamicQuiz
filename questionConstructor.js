@@ -1,6 +1,4 @@
 var Questions = {
-    questionBox: { div: document.createElement('div'), id:"question" },
-
     insertTitleInto: function(parent, level) {
         var questionTitle = document.createElement("h2");
         var textNode = document.createTextNode(triviaQuestions[level].question);
