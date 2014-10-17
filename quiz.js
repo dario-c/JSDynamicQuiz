@@ -1,19 +1,3 @@
-var questions = [
-    {
-    question: "Who is the Prime Minister of Germany?",
-    choices: ["Georg Bushstein", "Zapatitos", "Angela Merkel"],
-    correct: 2
-    },{
-    question: "What do they eat in Germany",
-    choices: ["Tapas!", "Schnitzel", "Babies' souls"],
-    correct: 2
-    },{
-    question: "What do they drink in Germany",
-    choices: ["Wine", "Water", "Anythingschorle"],
-    correct: 2
-    }
-];
-
 var startButton = document.getElementById('start');
 
 startButton.addEventListener("click", function(){
@@ -43,17 +27,33 @@ function insertChoicesInto(parent){
     var all = questions[0].choices;
     for(var i = 0; i < all.length; i++){
         parent.appendChild(createEachChoice(all[i], i));
-
-        parent.appendChild(document.createTextNode(all[i]));
-        parent.appendChild(document.createElement("br"));
     }
 }
 
 function createEachChoice(choice, i){
-    var newNode = document.createElement("input");
-    newNode.type = "radio";
-    newNode.name = "choices";
-    newNode.value = i;
-
+    var newNode = document.createElement("label");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "choices";
+    input.value = i;
+    newNode.appendChild(input);
+    newNode.appendChild(document.createTextNode(choice));
     return newNode;
 }
+
+
+var questions = [
+    {
+        question: "Who is the Prime Minister of Germany?",
+        choices: ["Georg Bushstein", "Zapatitos", "Angela Merkel"],
+        correct: 2
+    },{
+        question: "What do they eat in Germany",
+        choices: ["Tapas!", "Schnitzel", "Babies' souls"],
+        correct: 2
+    },{
+        question: "What do they drink in Germany",
+        choices: ["Wine", "Water", "Anythingschorle"],
+        correct: 2
+    }
+];
