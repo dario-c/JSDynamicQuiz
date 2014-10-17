@@ -7,21 +7,32 @@ var nextButton = document.createElement("button");
 startButton.addEventListener("click", function(){
     var parent = this.parentNode;
     parent.removeChild(this);
-    parent.appendChild( composeQuestion() );
+    var div = composeQuestion();
+    parent.insertBefore( div, document.scripts[0] );
 }, false);
 
 listenForSelection(document);
 
 nextButton.appendChild(document.createTextNode(" Next "));
 
-nextButton.addEventListener("click", function(){ console.log("Next")}, false);
+nextButton.addEventListener("click", function(){
+//    usersAnswers[0] = currentAnswer;
+//    currentAnswer = undefined;
+    console.log(usersAnswers);
+//
+    var parent = this.parentNode;
+    parent.removeChild(this);
+    parent.removeChild(document.getElementById('question'));
+    var div = composeQuestion();
+    parent.insertBefore( div, document.scripts[0] );
+}, false);
 
 
 
 function composeQuestion(){
     var qu = Questions;
-    var questionBox = qu.questionBox.div;
-    questionBox.id = qu.questionBox.id;
+    questionBox = document.createElement("div");
+    questionBox.id = "question"
     qu.insertTitleInto(questionBox);
     qu.insertChoicesInto(questionBox);
     return questionBox;
