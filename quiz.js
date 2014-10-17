@@ -1,8 +1,8 @@
 var usersAnswers = [];
 var currentAnswer;
 var nextActivated = false;
-
 var startButton = document.getElementById('start');
+var nextButton = document.createElement("button");
 
 startButton.addEventListener("click", function(){
     var parent = this.parentNode;
@@ -10,24 +10,30 @@ startButton.addEventListener("click", function(){
     parent.appendChild( composeQuestion() );
 }, false);
 
+listenForSelection(document);
+
+nextButton.appendChild(document.createTextNode(" Next "));
+
+nextButton.addEventListener("click", function(){ console.log("Next")}, false);
+
+
 
 function composeQuestion(){
-    var questionBox = document.createElement('div');
-    questionBox.id = 'question';
-    insertTitleInto(questionBox);
-    insertChoicesInto(questionBox);
-    addListenersTo(questionBox);
+    var qu = Questions;
+    var questionBox = qu.questionBox.div;
+    questionBox.id = qu.questionBox.id;
+    qu.insertTitleInto(questionBox);
+    qu.insertChoicesInto(questionBox);
     return questionBox;
 }
 
-function addListenersTo(question){
+function listenForSelection(question){
     question.addEventListener("click", function(event){
         if(event.target.name === "choices"){
             checkValue(this);
             if(!nextActivated){ addNextButton(); }
         }
-    }, false)
-}
+    }, false)}
 
 function checkValue(it){
     var allChoices = it.getElementsByTagName("input");
@@ -37,9 +43,6 @@ function checkValue(it){
             }
     }
 }
-
-var nextButton = document.createElement("button");
-nextButton.appendChild(document.createTextNode("Next ->"))
 
 function addNextButton(){
     var questionBox = document.getElementById("question").parentNode;
@@ -54,35 +57,14 @@ function addNextButton(){
 
 
 
-function insertTitleInto(parent) {
-    var questionTitle = document.createElement("h2");
-    var textNode = document.createTextNode(questions[0].question);
-    questionTitle.appendChild(textNode);
-    parent.appendChild(questionTitle);
-}
-
-function insertChoicesInto(parent){
-    var all = questions[0].choices;
-    for(var i = 0; i < all.length; i++){
-        parent.appendChild(createEachChoice(all[i], i));
-    }
-}
-
-function createEachChoice(choice, i){
-    var newNode = document.createElement("label");
-    var input = document.createElement("input");
-    input.type = "radio";
-    input.name = "choices";
-    input.value = i;
-    newNode.appendChild(input);
-    newNode.appendChild(document.createTextNode(choice));
-    return newNode;
-}
 
 
 
 
-var questions = [
+
+
+
+var triviaQuestions = [
     {
         question: "Who is the Prime Minister of Germany?",
         choices: ["Georg Bushstein", "Zapatitos", "Angela Merkel"],
