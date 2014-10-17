@@ -1,15 +1,15 @@
 var Questions = {
     questionBox: { div: document.createElement('div'), id:"question" },
 
-    insertTitleInto: function(parent) {
+    insertTitleInto: function(parent, level) {
         var questionTitle = document.createElement("h2");
-        var textNode = document.createTextNode(triviaQuestions[0].question);
+        var textNode = document.createTextNode(triviaQuestions[level].question);
         questionTitle.appendChild(textNode);
         parent.appendChild(questionTitle);
     },
 
-    insertChoicesInto: function(parent){
-        var all = triviaQuestions[0].choices;
+    insertChoicesInto: function(parent, level){
+        var all = triviaQuestions[level].choices;
         for(var i = 0; i < all.length; i++){
             parent.appendChild(Questions.createEachChoice(all[i], i));}},
 

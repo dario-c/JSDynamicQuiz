@@ -1,5 +1,6 @@
 var usersAnswers = [];
 var currentAnswer;
+var level = 0;
 var nextActivated = false;
 var startButton = document.getElementById('start');
 var nextButton = document.createElement("button");
@@ -16,10 +17,11 @@ listenForSelection(document);
 nextButton.appendChild(document.createTextNode(" Next "));
 
 nextButton.addEventListener("click", function(){
-    usersAnswers[0] = currentAnswer;
+    level++;
+    usersAnswers[level] = currentAnswer;
     currentAnswer = undefined;
+    nextActivated = false;
     console.log(usersAnswers);
-//
     var parent = this.parentNode;
     parent.removeChild(this);
     parent.removeChild(document.getElementById('question'));
@@ -32,9 +34,9 @@ nextButton.addEventListener("click", function(){
 function composeQuestion(){
     var qu = Questions;
     questionBox = document.createElement("div");
-    questionBox.id = "question"
-    qu.insertTitleInto(questionBox);
-    qu.insertChoicesInto(questionBox);
+    questionBox.id = "question";
+    qu.insertTitleInto(questionBox, level);
+    qu.insertChoicesInto(questionBox, level);
     return questionBox;
 }
 
