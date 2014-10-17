@@ -16,8 +16,8 @@ listenForSelection(document);
 nextButton.appendChild(document.createTextNode(" Next "));
 
 nextButton.addEventListener("click", function(){
-//    usersAnswers[0] = currentAnswer;
-//    currentAnswer = undefined;
+    usersAnswers[0] = currentAnswer;
+    currentAnswer = undefined;
     console.log(usersAnswers);
 //
     var parent = this.parentNode;
