@@ -47,7 +47,7 @@ if(level < triviaQuestions.length) {
         parent.removeChild(document.getElementById('question'));
 
         if(level < triviaQuestions.length){
-        parent.insertBefore(composeQuestion(), document.scripts[0]);
+            parent.insertBefore(composeQuestion(), document.scripts[0]);
         } else {
             checkScore();
             parent.insertBefore(composeResult(), document.scripts[0]);
@@ -106,7 +106,7 @@ function checkValue(it){
     for(var i = 0; i < allChoices.length; i++){
         if (allChoices[i].checked){
             currentAnswer = allChoices[i].value;
-            }
+        }
     }
 }
 

@@ -18,6 +18,7 @@ var Questions = {
         input.type = "radio";
         input.name = "choices";
         input.value = i;
+
         newNode.appendChild(input);
         newNode.appendChild(document.createTextNode(choice));
         return newNode;
